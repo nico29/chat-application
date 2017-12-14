@@ -46,7 +46,7 @@ class ChatApplication extends Component {
     onPostSubmit (content) {
         // notify new post creation
         const { socket, user } = this.state;
-        const post = { content, user, timestamp: Date.now() };
+        const post = { content, author: user, timestamp: Date.now() };
         socket.emit('post.publish', post);
         this.setState({ posts: [...this.state.posts, post] });
     }
@@ -60,7 +60,7 @@ class ChatApplication extends Component {
 
     hasPost (post) {
         const index = this.state.posts.findIndex(({ user, content, timestamp }) => {
-            return post.content === content && user === post.user && post.timestamp === timestamp;
+            return post.content === content && user === post.author && post.timestamp === timestamp;
         });
         return index > -1;
     }

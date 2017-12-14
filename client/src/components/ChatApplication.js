@@ -23,7 +23,7 @@ class ChatApplication extends Component {
             .then(({ posts }) => this.setState({ posts }));
         // init the socket connection
         const socket = io();
-        socket.on('post.receive', post => {
+        socket.on('post.publish', post => {
             // check if post update is made by this user
             if (!this.hasPost(post)) {
                 this.setState({ posts: [...this.state.posts, post] });
